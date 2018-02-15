@@ -17,6 +17,7 @@ def home_page(request):
         data = ""
 
     questions = Question.objects.all()
+    cheat_mode = request.GET.get('alohomora', '')
     done = request.GET.get('done', '')
     name = request.GET['name'] if done else ''
-    return render(request, 'home.html', { 'questions': questions, 'data': data, 'done': done, 'name': name })
+    return render(request, 'home.html', { 'questions': questions, 'data': data, 'done': done, 'name': name, 'cheat_mode': cheat_mode })

@@ -79,10 +79,10 @@
         <div id="qcm">
         {% for q in questions %}
           <div>
-          <h4>{{ q.question }}</h4>
+          <h4>{{ forloop.counter }}: {{ q.question }}</h4>
           <ol type="A">
             {% for a in q.answers.all %}
-            <li class="{% if a.correct %}correct{% endif %} {% if a.correct == False %}incorrect{% endif %}">
+            <li class="{% if cheat_mode and a.correct %}correct{% endif %} {% if cheat_mode and a.correct == False %}incorrect{% endif %}">
               <input type="checkbox" name="ans-{{ q.id }}-{{ a.id }}" />
               <label for="ans-{{ q.id }}-{{ a.id }}">{{ a.text }}</label>
             </li>
