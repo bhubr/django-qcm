@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>QCM</title>
+    <style>
+      body {
+        background: #eee;
+        line-height: 1.6;
+        font-size: 18px;
+        color: #444;
+      }
+      .container {
+        margin: 0 auto;
+        margin-top: 40px;
+        max-width: 800px;
+        padding: 40px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+      }
+      input[type="text"] {
+        padding: 5px 10px;
+        border: 1px solid #eee;
+        border-radius: 2px;
+        width: 300px;
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+      h1, h2, h3, h4 {
+        line-height:1.2
+      }
+      h4 {
+        margin-top: 40px;
+      }
+      .correct {
+        background: #afa;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>QCM Python / TDD / Django</h1>
+      <form method="POST" action="/">
+        {% csrf_token %}
+
+
+          <div>
+            <input type="text" name="nom" placeholder="Ton nom" required />
+          </div>
+          <div>
+            <input type="text" name="email" placeholder="Ton email" required />
+          </div>
+
+          <div id="qcm">
+          {% for q in questions %}
+            <div>
+            <h4>{{ q.question }}</h4>
+            <ol type="A">
+              {% for a in q.answers.all %}
+              <li class="{% if a.correct %}correct{% endif %}">
+                <input type="checkbox" name="ans-{{ q.id }}-{{ a.id }}" />
+                <label for="ans-{{ q.id }}-{{ a.id }}">{{ a.text }}</label>
+              </li>
+              {% endfor %}
+            </ol>
+            </div>
+          {% endfor %}
+          </div>
+      </form>
+
+
+      <h2>{% if user.email %}Logged-in as: {{ user }}{{ user.email }}{% else %}Not logged-in{% endif %}</h2>
+    </div>
+  </body>
+</html>

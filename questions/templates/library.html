@@ -1,0 +1,12 @@
+<html>
+  <title>MovieLib</title>
+    <body>
+      <h1>Your Movie list</h1>
+      <h2>{% if user.email %}Logged-in as: {{ user }}/{{ user.email }}{% else %}Not logged-in{% endif %}</h2>
+      <table id="movie-table">
+        {% for movie in movies %}
+          <tr><td>{{ forloop.counter }}: {{ movie.title }}</td></tr>
+        {% endfor %}
+      </table>
+  </body>
+</html>
