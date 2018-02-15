@@ -23,6 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     url(r'^$', question_views.home_page, name='home'),
-    path('libraries/<str:username>/', question_views.view_list),
     url(r'^accounts/register/$', account_views.register, name='register'),
 ]
