@@ -46,6 +46,9 @@
       .correct {
         background: #afa;
       }
+      .incorrect {
+        background: #faa;
+      }
     </style>
   </head>
   <body>
@@ -68,7 +71,7 @@
           <h4>{{ q.question }}</h4>
           <ol type="A">
             {% for a in q.answers.all %}
-            <li class="{% if a.correct %}correct{% endif %}">
+            <li class="{% if a.correct %}correct{% endif %} {% if a.correct == False %}incorrect{% endif %}">
               <input type="checkbox" name="ans-{{ q.id }}-{{ a.id }}" />
               <label for="ans-{{ q.id }}-{{ a.id }}">{{ a.text }}</label>
             </li>

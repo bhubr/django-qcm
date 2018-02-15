@@ -18,3 +18,7 @@ class Answer(models.Model):
 #     question = models.ForeignKey(Question, related_name='answers', on_delete=models.CASCADE, default=1)
 #     answer = models.TextField(default='')
 
+class StudentSubmission(models.Model):
+    name = models.TextField(default='')
+    email = models.TextField(default='')
+    data = models.TextField(default='')

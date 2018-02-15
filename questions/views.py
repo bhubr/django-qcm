@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from questions.models import Question, Answer
+from questions.models import Question, Answer, StudentSubmission
 import json
 
 # Create your views here.
@@ -7,6 +7,11 @@ def home_page(request):
     if request.method == 'POST':
         data = json.dumps(request.POST)
         print(data)
+        StudentSubmission.objects.create(
+          name=request.POST['nom'],
+          email=request.POST['email'],
+          data=data
+        )
         return redirect('/')
     else:
         data = ""
