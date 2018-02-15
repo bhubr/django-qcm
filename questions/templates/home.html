@@ -49,11 +49,22 @@
       .incorrect {
         background: #faa;
       }
+      .done {
+        padding: 10px;
+        background: #cec;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <h1>QCM Python / TDD / Django</h1>
+
+      {% if done %}
+        <div class="done">
+          Tes réponses ont bien été envoyées, {{ name }} !
+        </div>
+      {% endif %}
       <form method="POST" action="/">
         {% csrf_token %}
 

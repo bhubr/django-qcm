@@ -12,14 +12,11 @@ def home_page(request):
           email=request.POST['email'],
           data=data
         )
-        return redirect('/')
+        return redirect('/?done=1&name=' + request.POST['nom'])
     else:
         data = ""
 
     questions = Question.objects.all()
-    return render(request, 'home.html', { 'questions': questions, 'data': data })
-
-def view_list(request, username):
-    print(request.user.id if request.user else 'no auth')
-    movies = Movie.objects.all().filter(user_id=request.user.id)
-    return render(request, 'library.html', {'movies': movies})
+    done = request.GET.get('done', '')
+    name = request.GET['name'] if done else ''
+    return render(request, 'home.html', { 'questions': questions, 'data': data, 'done': done, 'name': name })
