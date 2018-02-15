@@ -18,6 +18,14 @@
         border-radius: 4px;
         background: #fff;
       }
+      input[type="submit"] {
+        padding: 10px 20px;
+        border: 1px solid #47c;
+        background: #47c;
+        color: #fff;
+        border-radius: 4px;
+        font-size: 28px;
+      }
       input[type="text"] {
         padding: 5px 10px;
         border: 1px solid #eee;
@@ -32,6 +40,9 @@
       h4 {
         margin-top: 40px;
       }
+      .center {
+        text-align: center;
+      }
       .correct {
         background: #afa;
       }
@@ -44,32 +55,36 @@
         {% csrf_token %}
 
 
-          <div>
-            <input type="text" name="nom" placeholder="Ton nom" required />
-          </div>
-          <div>
-            <input type="text" name="email" placeholder="Ton email" required />
-          </div>
+        <div>
+          <input type="text" name="nom" placeholder="Ton nom" required />
+        </div>
+        <div>
+          <input type="text" name="email" placeholder="Ton email" required />
+        </div>
 
-          <div id="qcm">
-          {% for q in questions %}
-            <div>
-            <h4>{{ q.question }}</h4>
-            <ol type="A">
-              {% for a in q.answers.all %}
-              <li class="{% if a.correct %}correct{% endif %}">
-                <input type="checkbox" name="ans-{{ q.id }}-{{ a.id }}" />
-                <label for="ans-{{ q.id }}-{{ a.id }}">{{ a.text }}</label>
-              </li>
-              {% endfor %}
-            </ol>
-            </div>
-          {% endfor %}
+        <div id="qcm">
+        {% for q in questions %}
+          <div>
+          <h4>{{ q.question }}</h4>
+          <ol type="A">
+            {% for a in q.answers.all %}
+            <li class="{% if a.correct %}correct{% endif %}">
+              <input type="checkbox" name="ans-{{ q.id }}-{{ a.id }}" />
+              <label for="ans-{{ q.id }}-{{ a.id }}">{{ a.text }}</label>
+            </li>
+            {% endfor %}
+          </ol>
           </div>
+        {% endfor %}
+        </div>
+
+        <div class="center">
+          <input type="submit" name="submit" value="Valider" required />
+        </div>
       </form>
 
-
-      <h2>{% if user.email %}Logged-in as: {{ user }}{{ user.email }}{% else %}Not logged-in{% endif %}</h2>
+      {{ data }}
+      <!-- <h2>{% if user.email %}Logged-in as: {{ user }}{{ user.email }}{% else %}Not logged-in{% endif %}</h2> -->
     </div>
   </body>
 </html>

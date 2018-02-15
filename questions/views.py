@@ -1,14 +1,18 @@
 from django.shortcuts import redirect, render
 from questions.models import Question, Answer
+import json
 
 # Create your views here.
 def home_page(request):
     if request.method == 'POST':
-        Question.objects.create(question=request.POST['question-text'])
+        data = json.dumps(request.POST)
+        print(data)
         return redirect('/')
+    else:
+        data = ""
 
     questions = Question.objects.all()
-    return render(request, 'home.html', { 'questions': questions, 'name': 'Guest' })
+    return render(request, 'home.html', { 'questions': questions, 'data': data })
 
 def view_list(request, username):
     print(request.user.id if request.user else 'no auth')
